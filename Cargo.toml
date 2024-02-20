@@ -1,0 +1,29 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["RSUU <rsuuyu@gmail.com>"]
+description = "candy"
+homepage = "https://crates.io/crates/rka"
+repository = "https://github.com/rsuu/rka"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+keywords = ["config", "serialization", "deserialization", "parser"]
+categories = ["encoding"]
+exclude = ["examples/", ".gitignore", ".github/", "tests/"]
+
+[workspace.dependencies]
+proc-macro2 = "1.0.78"
+quote = "1.0.35"
+syn = { version = "2.0.48", features = [
+  "full",
+  "extra-traits",
+  "parsing",
+  "proc-macro",
+] }
+prettyplease = "0.2.16"
+rka-fn= { version = "0.1.0", path = "./crates/rka-fn" }
+rka-derive = { version = "0.1.0", path = "./crates/rka-derive" }

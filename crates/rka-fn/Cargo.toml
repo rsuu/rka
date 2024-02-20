@@ -1,0 +1,44 @@
+[package]
+name = "rka-fn"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+homepage.workspace = true
+repository.workspace = true
+readme.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+exclude.workspace = true
+
+[lib]
+#crate-type = ["cdylib", "rlib"]
+proc-macro = true
+
+[profile.release]
+lto = "thin"
+opt-level = 2
+codegen-units = 1
+panic = "abort"
+overflow-checks = false
+debug = false
+debug-assertions = false
+incremental = false
+strip = true
+
+#[profile.release.package."*"]
+#opt-level = 2
+#codegen-units = 1
+#debug = false
+#debug-assertions = false
+#incremental = false
+#strip = true
+
+[dependencies]
+proc-macro2.workspace = true
+quote.workspace = true
+syn.workspace = true
+prettyplease.workspace=true
+
+[features]
