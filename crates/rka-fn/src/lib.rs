@@ -1,6 +1,11 @@
 #![crate_type = "proc-macro"]
 
+// unit!()
+//   dur!
+//   size!
+
 mod opt;
+mod size;
 mod time;
 
 /// Syntactic sugar for [`Duration`].
@@ -104,7 +109,7 @@ pub fn draft(_: proc_macro::TokenStream) -> proc_macro::TokenStream {
 
 // TODO:
 // f()
-//   .{ f1(this) }
+//   .{ f1(this); this }
 //   .{ f2(this, v1, v2) }
 //   .{ this + 3 }
 // ;

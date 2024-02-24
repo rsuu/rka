@@ -5,10 +5,6 @@ fn main() {
     test_postfix_block();
 }
 
-draft! {
-    struct Inject {}
-}
-
 fn test_dur() {
     let v = Some(123_u32);
 
@@ -26,28 +22,6 @@ fn test_dur() {
         }
     });
     dbg!(k);
-
-    {
-        let l1 = '__rka_tmp_scope_1: loop {
-            '__rka_tmp_scope_2: loop {
-                let a = 1;
-                dbg!(a);
-
-                '__rka_tmp_scope_3: loop {
-                    // return 'fn;
-                    //return;
-                    break '__rka_tmp_scope_3;
-                }
-
-                // return '__rka_tmp_scope_2;
-                //     // expand
-                break '__rka_tmp_scope_2;
-            }
-
-            break '__rka_tmp_scope_1 "l1";
-        };
-        dbg!(l1);
-    }
 }
 
 fn test_sleep() {
@@ -72,13 +46,18 @@ fn test_postfix_block() {
     }
     impl<T> Test for T {}
 
-    // impl this if possable
     draft! {
         start()
             .{ add(this) }
             .test::<u32>()
             .{
+                this.push(1);
+
+                this
+            }
+            .{
                 let b = this;
+
                 sub(this, b)
             }
             .to_owned()
@@ -116,4 +95,40 @@ fn test_postfix_block() {
             .to_owned()
     };
     assert_eq!(res, 5);
+
+    let vec = postfix_block! {
+        vec![]
+            .this({
+                this.push(1);
+            })
+            .this({
+                this.push(2);
+            })
+            .pipe({
+                vec![this[0], this[1], 3, 4]
+            })
+    };
+    dbg!(vec);
+}
+
+draft! {
+    let l1 = '__rka_tmp_scope_1: loop {
+        '__rka_tmp_scope_2: loop {
+            let a = 1;
+            dbg!(a);
+
+            '__rka_tmp_scope_3: loop {
+                // return 'fn;
+                //return;
+                break '__rka_tmp_scope_3;
+            }
+
+            // return '__rka_tmp_scope_2;
+            //     // expand
+            break '__rka_tmp_scope_2;
+        }
+
+        break '__rka_tmp_scope_1 "l1";
+    };
+    dbg!(l1);
 }
