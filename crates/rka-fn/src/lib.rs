@@ -138,11 +138,16 @@ pub fn postfix_match_block(ts: proc_macro::TokenStream) -> proc_macro::TokenStre
     opt::postfix::postfix_match_block(ts)
 }
 
-// TODO:
+// DROP:
 // return <lifetime> <expr>;
 // e.g.
 //     return 'a 1234;
 #[proc_macro]
 pub fn return_from_lifetime(ts: proc_macro::TokenStream) -> proc_macro::TokenStream {
     proc_macro::TokenStream::new()
+}
+
+#[proc_macro]
+pub fn named_args(ts: proc_macro::TokenStream) -> proc_macro::TokenStream {
+    opt::named_args::parse(ts)
 }
